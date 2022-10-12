@@ -1,0 +1,48 @@
+syntax = "proto3";
+package calculator;
+
+option go_package = "calculator/api";
+
+// Those requests could be the same object but I believe each of them should have 1 responsibility so, let's separate them
+message AdditionCalculationRequest {
+  float firstNumber = 1;
+  float secondNumber = 2;
+}
+
+message SubtractionCalculationRequest {
+  float firstNumber = 1;
+  float secondNumber = 2;
+}
+
+message DivisionCalculationRequest {
+  float firstNumber = 1;
+  float secondNumber = 2;
+}
+
+message MultiplicationCalculationRequest {
+  float firstNumber = 1;
+  float secondNumber = 2;
+}
+
+message AllCalculationRequest {
+  float firstNumber = 1;
+  float secondNumber = 2;
+}
+
+message CalculationResponse {
+  float result = 1;
+  optional string calculation = 2;
+  string error = 3;
+}
+
+message AllCalculationsResponse {
+  repeated CalculationResponse calculations = 1;
+}
+
+service CalculatorService {
+  rpc Addition(AdditionCalculationRequest) returns (CalculationResponse) {}
+  rpc Subtraction(SubtractionCalculationRequest) returns (CalculationResponse) {}
+  rpc Division(DivisionCalculationRequest) returns (CalculationResponse) {}
+  rpc Multiplication(MultiplicationCalculationRequest) returns (CalculationResponse) {}
+  rpc AllCalculations(AllCalculationRequest) returns (AllCalculationsResponse) {}
+}
