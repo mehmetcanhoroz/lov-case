@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 	"lovoo/calculator/service"
+	"lovoo/utils"
 )
 
 type CalculatorServer struct {
@@ -51,7 +52,42 @@ func (s CalculatorServer) Multiplication(ctx context.Context, in *Multiplication
 	return &response, nil
 }
 func (s CalculatorServer) AllCalculations(ctx context.Context, in *AllCalculationRequest) (*AllCalculationsResponse, error) {
-	return nil, nil
+	resultAdd, err := s.calculatorService.Add(in.FirstNumber, in.SecondNumber)
+	if err != nil {
+		return nil, err
+	}
+	resultSub, err := s.calculatorService.Sub(in.FirstNumber, in.SecondNumber)
+	if err != nil {
+		return nil, err
+	}
+	resultDiv, err := s.calculatorService.Div(in.FirstNumber, in.SecondNumber)
+	if err != nil {
+		return nil, err
+	}
+	resultMulti, err := s.calculatorService.Multi(in.FirstNumber, in.SecondNumber)
+	if err != nil {
+		return nil, err
+	}
+	return &AllCalculationsResponse{
+		Calculations: []*CalculationResponse{
+			{
+				Result:      resultAdd,
+				Calculation: utils.StringWithPointer("+"),
+			},
+			{
+				Result:      resultSub,
+				Calculation: utils.StringWithPointer("-"),
+			},
+			{
+				Result:      resultDiv,
+				Calculation: utils.StringWithPointer("/"),
+			},
+			{
+				Result:      resultMulti,
+				Calculation: utils.StringWithPointer("*"),
+			},
+		},
+	}, nil
 }
 func NewCalculatorServer(calculatorService service.CalculatorService) CalculatorServer {
 	return CalculatorServer{

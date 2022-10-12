@@ -20,15 +20,48 @@ func main() {
 
 	ctx := context.Background()
 
-	//resp, err := client.Addition(ctx, &api.AdditionCalculationRequest{})
-	//if err != nil {
-	//	panic(err)
-	//}
-	//fmt.Println(resp)
-
-	resp, err := client.Division(ctx, &api.DivisionCalculationRequest{})
+	resp, err := client.Addition(ctx, &api.AdditionCalculationRequest{
+		FirstNumber:  1,
+		SecondNumber: 2,
+	})
 	if err != nil {
 		panic(err)
 	}
 	fmt.Println(resp)
+
+	resp, err = client.Division(ctx, &api.DivisionCalculationRequest{
+		FirstNumber:  6,
+		SecondNumber: 3,
+	})
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(resp)
+
+	resp, err = client.Multiplication(ctx, &api.MultiplicationCalculationRequest{
+		FirstNumber:  5,
+		SecondNumber: 2,
+	})
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(resp)
+
+	resp, err = client.Subtraction(ctx, &api.SubtractionCalculationRequest{
+		FirstNumber:  6,
+		SecondNumber: 5,
+	})
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(resp)
+
+	respx, err := client.AllCalculations(ctx, &api.AllCalculationRequest{
+		FirstNumber:  10,
+		SecondNumber: 2,
+	})
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(respx)
 }
