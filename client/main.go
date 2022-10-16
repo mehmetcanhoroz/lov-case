@@ -33,11 +33,9 @@ func run(args []string, stdout io.Writer) error {
 	flags.StringVar(&calculation, "method", "all", "-method add")
 	flags.IntVar(&n1, "a", 1, "-a 0")
 	flags.IntVar(&n2, "b", 1, "-b 0")
-
-	fmt.Println(flags)
-	fmt.Println(calculation)
-	fmt.Println(n1)
-	fmt.Println(n2)
+	if err := flags.Parse(args[1:]); err != nil {
+		return fmt.Errorf("could not parse flags, err: %w", err)
+	}
 
 	err := godotenv.Load()
 	if err != nil {
