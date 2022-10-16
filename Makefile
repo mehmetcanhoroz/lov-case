@@ -1,6 +1,16 @@
-build-client:
+install:
 	go mod download
-	env GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o bin/client ./client/main.go
-
+build-client:
+	make install
+	./scripts/build.sh client client/main.go client
+build-server:
+	make install
+	./scripts/build.sh server main.go server
+build:
+	make install
+	./scripts/build.sh $(fn) $(from) $(where)
 lint:
 	golangci-lint run ./... --fast
+
+clean:
+	rm -rf ./bin Gopkg.lock
