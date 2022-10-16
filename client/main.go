@@ -4,12 +4,29 @@ import (
 	"context"
 	"fmt"
 	"lovoo/calculator/api"
+	"os"
 
+	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 )
 
 func main() {
-	serverAddress := "localhost:8000"
+	err := godotenv.Load()
+	if err != nil {
+		panic(err)
+	}
+
+	serverHost := os.Getenv("SERVER_HOST")
+	if serverHost == "" {
+		panic("Server Host env is empty!")
+	}
+
+	serverPort := os.Getenv("SERVER_PORT")
+	if serverPort == "" {
+		panic("Server Port env is empty!")
+	}
+
+	serverAddress := fmt.Sprintf("%s:%s", serverHost, serverPort)
 
 	connection, err := grpc.Dial(serverAddress, grpc.WithInsecure())
 	if err != nil {

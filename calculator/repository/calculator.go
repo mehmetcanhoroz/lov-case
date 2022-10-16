@@ -7,6 +7,7 @@ type CalculatorRepository interface {
 	Multi(float32, float32) (float32, error)
 }
 type calculatorRepository struct {
+	// We can add here like Gorm, Mysql driver etc.
 }
 
 func (s calculatorRepository) Add(n1, n2 float32) (float32, error) {

@@ -6,7 +6,9 @@ import (
 	"lovoo/calculator/repository"
 	"lovoo/calculator/service"
 	"net"
+	"os"
 
+	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 )
 
@@ -14,7 +16,16 @@ type Application struct {
 }
 
 func (a Application) Start() {
-	listener, err := net.Listen("tcp", ":8000")
+	err := godotenv.Load()
+	if err != nil {
+		panic(err)
+	}
+	serverPort := os.Getenv("SERVER_PORT")
+	if serverPort == "" {
+		panic("Server Port env is empty!")
+	}
+
+	listener, err := net.Listen("tcp", ":"+serverPort)
 	if err != nil {
 		panic(err)
 	}
@@ -26,7 +37,7 @@ func (a Application) Start() {
 	server := grpc.NewServer()
 	api.RegisterCalculatorServiceServer(server, calculatorServer)
 
-	fmt.Println("Server is starting...")
+	fmt.Printf("Server is starting on port:%s\n", serverPort)
 	if err := server.Serve(listener); err != nil {
 		panic(err)
 	}

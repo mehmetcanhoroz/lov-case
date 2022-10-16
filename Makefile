@@ -1,4 +1,5 @@
 install:
+	cp .env.local .env
 	go mod download
 build-client:
 	make install
