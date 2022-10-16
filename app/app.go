@@ -42,3 +42,7 @@ func (a Application) Start() {
 		panic(err)
 	}
 }
+
+func NewApplication() Application {
+	return Application{}
+}

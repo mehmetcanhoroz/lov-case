@@ -2,11 +2,9 @@ install:
 	cp .env.local .env
 	go mod download
 build-client:
-	make install
-	./scripts/build.sh client client/main.go client
+	make build fn=client from=client/main.go where=client
 build-server:
-	make install
-	./scripts/build.sh server main.go server
+	make build fn=server from=main.go where=server
 build:
 	make install
 	./scripts/build.sh $(fn) $(from) $(where)

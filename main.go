@@ -5,6 +5,6 @@ import (
 )
 
 func main() {
-	mainApp := app.Application{}
+	mainApp := app.NewApplication()
 	mainApp.Start()
 }
