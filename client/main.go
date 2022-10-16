@@ -2,7 +2,9 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
+	"io"
 	"lovoo/calculator/api"
 	"os"
 
@@ -10,7 +12,27 @@ import (
 	"google.golang.org/grpc"
 )
 
+var (
+	calculation string
+	n1, n2      int
+)
+
 func main() {
+	if err := run(os.Args, os.Stdout); err != nil {
+		_, err := fmt.Fprintf(os.Stderr, "%s\n", err)
+		if err != nil {
+			panic(err)
+		}
+		os.Exit(1)
+	}
+}
+
+func run(args []string, stdout io.Writer) error {
+	flags := flag.NewFlagSet(args[0], flag.ExitOnError)
+	flags.StringVar(&calculation, "method", "all", "-method add")
+	flags.IntVar(&n1, "a", 1, "-a 0")
+	flags.IntVar(&n2, "b", 1, "-b 0")
+
 	err := godotenv.Load()
 	if err != nil {
 		panic(err)
@@ -37,48 +59,52 @@ func main() {
 
 	ctx := context.Background()
 
-	resp, err := client.Addition(ctx, &api.AdditionCalculationRequest{
-		FirstNumber:  1,
-		SecondNumber: 2,
-	})
-	if err != nil {
-		panic(err)
+	switch calculation {
+	case "add":
+		resp, err := client.Addition(ctx, &api.AdditionCalculationRequest{
+			FirstNumber:  float32(n1),
+			SecondNumber: float32(n2),
+		})
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(resp)
+	case "sub":
+		resp, err := client.Subtraction(ctx, &api.SubtractionCalculationRequest{
+			FirstNumber:  float32(n1),
+			SecondNumber: float32(n2),
+		})
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(resp)
+	case "div":
+		resp, err := client.Division(ctx, &api.DivisionCalculationRequest{
+			FirstNumber:  float32(n1),
+			SecondNumber: float32(n2),
+		})
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(resp)
+	case "multi":
+		resp, err := client.Multiplication(ctx, &api.MultiplicationCalculationRequest{
+			FirstNumber:  float32(n1),
+			SecondNumber: float32(n2),
+		})
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(resp)
+	default:
+		resp, err := client.AllCalculations(ctx, &api.AllCalculationRequest{
+			FirstNumber:  float32(n1),
+			SecondNumber: float32(n2),
+		})
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(resp)
 	}
-	fmt.Println(resp)
-
-	resp, err = client.Division(ctx, &api.DivisionCalculationRequest{
-		FirstNumber:  6,
-		SecondNumber: 3,
-	})
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(resp)
-
-	resp, err = client.Multiplication(ctx, &api.MultiplicationCalculationRequest{
-		FirstNumber:  5,
-		SecondNumber: 2,
-	})
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(resp)
-
-	resp, err = client.Subtraction(ctx, &api.SubtractionCalculationRequest{
-		FirstNumber:  6,
-		SecondNumber: 5,
-	})
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(resp)
-
-	respx, err := client.AllCalculations(ctx, &api.AllCalculationRequest{
-		FirstNumber:  10,
-		SecondNumber: 2,
-	})
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(respx)
+	return nil
 }

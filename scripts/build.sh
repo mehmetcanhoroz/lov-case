@@ -13,7 +13,7 @@ NC='\033[0m'
 
 build_function() {
   echo -e "${GREEN}Building $1...${NC}"
-  env GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o ./bin/"$where" ./"$from"
+  env GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o ./bin/"$where" ./"$from"
 }
 
 build_function "$1" "$2" "$3"
