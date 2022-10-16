@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"lovoo/calculator/api"
+	"lovoo/calculator/repository"
 	"lovoo/calculator/service"
 	"net"
 
@@ -15,7 +16,8 @@ func main() {
 		panic(err)
 	}
 
-	calculatorService := service.NewCalculatorService()
+	calculatorRepository := repository.NewCalculatorRepository()
+	calculatorService := service.NewCalculatorService(calculatorRepository)
 	calculatorServer := api.NewCalculatorServer(calculatorService)
 
 	server := grpc.NewServer()
