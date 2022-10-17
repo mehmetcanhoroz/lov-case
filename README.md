@@ -58,6 +58,8 @@ This section contains list major frameworks/libraries used to bootstrap the proj
 * [![Golang][Golang]][Golang-url]
 * [![Golang][gRPC]][gRPC-url]
 * [![Makefile][makefile]][makefile-url]
+* [![Mockery][mockery]][mockery-url]
+* [![Testify][testify]][testify-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -155,3 +157,7 @@ Mehmet Canhoroz - [@mehmetcanhoroz](https://twitter.com/mehmetcanhoroz)
 [makefile-url]: https://www.gnu.org/software/make/manual/make.html
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/mehmet-canhoroz
+[mockery]: https://img.shields.io/badge/Mockery-563D7C?style=for-the-badge&logo=mockery&logoColor=white
+[mockery-url]: https://github.com/vektra/mockery
+[testify]: https://img.shields.io/badge/Testify-FF2D20?style=for-the-badge&logo=testify&logoColor=white
+[testify-url]: https://github.com/stretchr/testify
