@@ -18,7 +18,6 @@ var (
 )
 
 func main() {
-	fmt.Printf("%v \n", os.Args[1])
 	if err := run(os.Args, os.Stdout); err != nil {
 		_, err := fmt.Fprintf(os.Stderr, "%s\n", err)
 		if err != nil {
