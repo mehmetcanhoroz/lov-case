@@ -123,12 +123,13 @@ _After development or to use this application directly we need to build Server a
 <!-- FEATURES -->
 ## Features
 
-- [x] Addition, subtraction, multiplication and division.
-- [x] Subtraction, multiplication and division.
-- [x] Multiplication and division.
-- [x] Division.
+- [x] Addition
+- [x] Subtraction
+- [x] Multiplication
+- [x] Division
 - [x] All calculation in an api
 - [x] Build and manage bins with Makefile
+- [x] Mockery and Testify
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
