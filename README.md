@@ -99,19 +99,19 @@ _After development or to use this application directly we need to build Server a
    ```
 4. Send Request to Server via Client - 5 Different options we have
    ```sh
-   ./bin/client -method add -a 10 -b 20
+   ./bin/client -method add -a 20 -b 20
    ```
    ```sh
-   ./bin/client -method sub -a 10 -b 20
+   ./bin/client -method sub -a 50 -b 20
    ```
    ```sh
    ./bin/client -method div -a 10 -b 2
    ```
    ```sh
-   ./bin/client -method multi -a 10 -b 20
+   ./bin/client -method multi -a 50 -b 20
    ```
    ```sh
-   ./bin/client -method all -a 10 -b 20
+   ./bin/client -method all -a 20 -b 10
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
