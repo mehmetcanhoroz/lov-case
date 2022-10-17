@@ -2,8 +2,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
+    <img src="https://pngimg.com/uploads/calculator/calculator_PNG102230.png" alt="Logo" width="120">
 <h3 align="center">Test Case with gRPC</h3>
-
   <p align="center">
     This repo is created for test case!
   </p>
