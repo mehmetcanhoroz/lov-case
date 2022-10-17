@@ -10,6 +10,7 @@ import (
 
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 var (
@@ -53,7 +54,7 @@ func run(args []string, stdout io.Writer) error {
 
 	serverAddress := fmt.Sprintf("%s:%s", serverHost, serverPort)
 
-	connection, err := grpc.Dial(serverAddress, grpc.WithInsecure())
+	connection, err := grpc.Dial(serverAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		panic(err)
 	}
